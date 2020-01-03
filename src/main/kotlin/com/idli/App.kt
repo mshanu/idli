@@ -3,6 +3,7 @@ package com.idli
 import com.idli.datatypes.oracle.OracleTypes
 import com.idli.extensions.parseLineToColumnValues
 import com.idli.extensions.parseLineToColumns
+import com.idli.model.Table
 import java.io.File
 
 fun main() {
@@ -14,5 +15,5 @@ fun main() {
     val columns =
         randomLines.drop(1).fold(columnsBuilders, operation = { acc, s -> s.parseLineToColumnValues(acc) })
             .map { it.build() }
-    print(columns.map { it.createStatement() })
+    print(Table("sample", columns).createStatement())
 }
