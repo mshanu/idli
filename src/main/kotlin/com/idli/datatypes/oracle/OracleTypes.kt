@@ -1,27 +1,13 @@
 package com.idli.datatypes.oracle
 
-import com.idli.datatypes.InferType
-import com.idli.extensions.isBoolean
-import com.idli.extensions.isNumber
-import com.idli.model.*
+import com.idli.model.BooleanType
+import com.idli.model.NullType
+import com.idli.model.NumberType
+import com.idli.model.StringType
 
-class OracleTypes : InferType {
-    override fun infer(value: String): BaseType {
-        if (value.isEmpty()) {
-            return NullType("VARCHAR2")
-        }
-        if (value.isNumber()) {
-            val split = value.replace(",", "").split(".")
-            return if (split.count() > 1) {
-                NumberType("NUMBER", split.first().length, split.drop(0).first().length)
-            } else {
-                NumberType("NUMBER", split.first().length)
-            }
-
-        }
-        if (value.isBoolean()) {
-            return BooleanType("BOOLEAN")
-        }
-        return StringType("varchar2", value.length)
-    }
+class OracleTypes :  ITypes {
+    override fun nullType(): NullType = NullType("VARCHAR2")
+    override fun numberType(precision: Int, scale: Int?) = NumberType("NUMBER", precision, scale)
+    override fun booleanType() = BooleanType("BOOLEAN")
+    override fun stringType(size: Int) = StringType("VARCHAR2", size)
 }
