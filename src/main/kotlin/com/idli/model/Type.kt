@@ -5,11 +5,13 @@ data class Type(val name: String, val size: Int? = null, val precision: Int? = n
         val statementBuilder = StringBuilder()
         statementBuilder.append(name)
         size?.let {
-            statementBuilder.append("($size")
-            precision?.let {
-                statementBuilder.append(",$precision")
+            if (size != 0) {
+                statementBuilder.append("($size")
+                precision?.let {
+                    statementBuilder.append(",$precision")
+                }
+                statementBuilder.append(")")
             }
-            statementBuilder.append(")")
         }
         if (!isNullable) {
             statementBuilder.append(" ")

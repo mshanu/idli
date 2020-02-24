@@ -5,7 +5,7 @@ data class NullType(val fallBackType: String) : BaseType(fallBackType)
 data class StringType(override val name: String, val size: Int) : BaseType(name)
 data class NumberType(
     override val name: String,
-    val precision: Int,
+    val precision: Int? = null,
     val scale: Int? = null
 ) : BaseType(name)
 

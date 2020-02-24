@@ -13,7 +13,7 @@ class TypeInfer(private val type: ITypes) : InferType {
         if (value.isNumber()) {
             val split = value.replace(",", "").split(".")
             return if (split.count() > 1) {
-                type.numberType(split.first().length, split.drop(0).first().length)
+                type.numberType(split.first().length + split.last().length, split.drop(0).first().length)
             } else {
                 type.numberType(split.first().length)
             }

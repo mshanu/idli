@@ -16,17 +16,20 @@ class Types {
         val maxLength = types.map {
             when (it) {
                 is StringType -> it.size
-                is NumberType -> it.precision
+                is NumberType -> it.precision ?: 0
                 else -> 0
             }
         }.max()
 
-        if (isNumberType) return Type(
-            types.first { it is NumberType }.name,
-            maxLength,
-            allNonNullTypes.map { if (it is NumberType && it.scale != null) it.scale else 0 }.max(),
-            types.any { it is NullType }
-        )
+        if (isNumberType) {
+            val maxScale = allNonNullTypes.map { if (it is NumberType && it.scale != null) it.scale else 0 }.max()
+            return Type(
+                types.first { it is NumberType }.name,
+                (maxLength ?: 0) + (maxScale ?: 0),
+                maxScale,
+                types.any { it is NullType }
+            )
+        }
         return Type(types.first().name, maxLength)
     }
 }

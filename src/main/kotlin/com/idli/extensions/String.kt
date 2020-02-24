@@ -1,7 +1,7 @@
 package com.idli.extensions
 
 fun String.isNumber(): Boolean {
-    return this.matches(Regex("-?[\\d,]+\\d(\\.\\d+)?"))
+    return this.matches(Regex("-?[\\d,]*\\d(\\.\\d+)?"))
 }
 
 fun String.isBoolean(): Boolean {
