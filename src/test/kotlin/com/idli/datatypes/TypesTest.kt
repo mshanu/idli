@@ -85,9 +85,16 @@ class TypesTest {
             types.add(NumberType("NUMBER", 3))
             val inferredType = types.infer()
             assertEquals("NUMBER", inferredType.name)
-            assertEquals(3, inferredType.size)
+        }
+
+        @Test
+        fun shouldInferToNumberTypeWithSizeSumOfMaxPrecisionAndScale() {
+            types.add(NumberType("NUMBER", 3, 2))
+            types.add(NumberType("NUMBER", 3, 5))
+            types.add(NumberType("NUMBER", 3))
+            val inferredType = types.infer()
+            assertEquals(8, inferredType.size)
             assertEquals(5, inferredType.precision)
-            assertFalse(inferredType.isNullable)
         }
 
         @Test
@@ -97,8 +104,6 @@ class TypesTest {
             types.add(NullType("string"))
             val inferredType = types.infer()
             assertEquals("NUMBER", inferredType.name)
-            assertEquals(3, inferredType.size)
-            assertEquals(5, inferredType.precision)
             assertTrue(inferredType.isNullable)
         }
     }

@@ -6,8 +6,10 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
  * This is a general purpose Gradle build.
  * Learn how to create Gradle builds at https://guides.gradle.org/creating-new-gradle-builds
  */
-
+group = "com.idli"
+version = "0.0.1"
 plugins {
+    application
     idea
     kotlin("jvm") version "1.3.61"
 }
@@ -15,12 +17,19 @@ plugins {
 repositories {
     mavenCentral()
 }
+application {
+    mainClassName = "com.idli.AppKt"
+}
 
 dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.0.0")
     testImplementation("org.junit.jupiter:junit-jupiter:5.4.2")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.4.2")
+    implementation("mysql:mysql-connector-java:8.0.19")
     implementation(kotlin("stdlib-jdk8"))
+    implementation("com.github.seratch:kotliquery:1.3.1")
+    implementation(fileTree("libs"))
+
 }
 
 tasks.test {
