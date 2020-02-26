@@ -10,4 +10,6 @@ data class NumberType(
 ) : BaseType(name)
 
 data class BooleanType(override val name: String) : BaseType(name)
+data class DateType(override val name: String) : BaseType(name)
+data class DateTimeType(override val name: String) : BaseType(name)
 

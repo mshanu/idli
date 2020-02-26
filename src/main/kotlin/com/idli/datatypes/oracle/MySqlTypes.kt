@@ -1,14 +1,13 @@
 package com.idli.datatypes.oracle
 
-import com.idli.model.BooleanType
-import com.idli.model.NullType
-import com.idli.model.NumberType
-import com.idli.model.StringType
+import com.idli.model.*
 
 class MySqlTypes : ITypes {
-    override fun nullType(): NullType {
-        return NullType("VARCHAR")
-    }
+    override fun dateTimeType(): DateTimeType = DateTimeType("DATETIME")
+
+    override fun dateType(): DateType = DateType("DATE")
+
+    override fun nullType(): NullType = NullType("VARCHAR")
 
     override fun numberType(precision: Int, scale: Int?): NumberType {
         if (scale != null && scale > 0) {
@@ -17,11 +16,6 @@ class MySqlTypes : ITypes {
         return NumberType("INT")
     }
 
-    override fun booleanType(): BooleanType {
-        return BooleanType("BOOLEAN")
-    }
-
-    override fun stringType(size: Int): StringType {
-        return StringType("VARCHAR", size)
-    }
+    override fun booleanType(): BooleanType = BooleanType("BOOLEAN")
+    override fun stringType(size: Int): StringType = StringType("VARCHAR", size)
 }

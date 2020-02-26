@@ -24,6 +24,18 @@ class TypeInferTest {
         assertEquals(6, (type as StringType).size)
     }
 
+    @Test
+    fun `should return date time type for string with date`() {
+        val type = oracleTypes.infer("2020-01-01 10:10:10+05:30")
+        assertEquals("DATETIME", type.name)
+    }
+
+    @Test
+    fun `should return date type for string with only date`() {
+        val type = oracleTypes.infer("2020-01-01")
+        assertEquals("DATE", type.name)
+    }
+
     @ParameterizedTest
     @CsvSource(
         value = ["123123 | NUMBER", "12321,12321 | NUMBER",
