@@ -9,6 +9,7 @@ Idli helps you to generate create statement based on the data (sampling) for a d
 Currently it takes only csv file with first line as header and generates the script for the following dbs
 * Oracle
 * Mysql
+* Postgres
 
 ### Instructions to Run
 git clone

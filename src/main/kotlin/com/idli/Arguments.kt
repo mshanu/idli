@@ -3,11 +3,17 @@ package com.idli
 import com.idli.datatypes.oracle.ITypes
 import com.idli.datatypes.oracle.MySqlTypes
 import com.idli.datatypes.oracle.OracleTypes
+import com.idli.datatypes.oracle.PostgresTypes
 import java.io.File
 
 data class Arguments(val file: File, val types: ITypes) {
     companion object {
-        val types = mapOf<String, ITypes>("mysql" to MySqlTypes(), "oracle" to OracleTypes())
+        private val types = mapOf<String, ITypes>(
+            "mysql" to MySqlTypes(),
+            "oracle" to OracleTypes(),
+            "pg" to PostgresTypes()
+        )
+
         fun parse(args: Array<String>): Arguments {
             val filePath = args.find { it.contains(Regex("^file=.*")) }?.split("=")?.get(1)
                 ?: throw Exception("file argument not specified.")
