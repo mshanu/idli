@@ -12,5 +12,9 @@ Currently it takes only csv file with first line as header and generates the scr
 * Postgres
 
 ### Instructions to Run
+
 git clone
+
 `./gradlew run --args "file=<path_to_file> db=mysql"`
+
+db values can be oracle, mysql or pg
