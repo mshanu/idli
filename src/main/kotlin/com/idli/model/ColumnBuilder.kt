@@ -14,6 +14,6 @@ class ColumnBuilder(private val name: String, private val infer: InferType) {
     }
 
     fun build(): Column {
-        return Column(name, inferredTypes.infer())
+        return Column(name, inferredTypes.infer(),sampleData)
     }
 }

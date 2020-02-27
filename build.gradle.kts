@@ -35,6 +35,9 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
 }
+val run: JavaExec by tasks
+run.standardInput = System.`in`
+
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions {
     jvmTarget = "1.8"
