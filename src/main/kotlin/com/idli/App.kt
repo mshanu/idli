@@ -10,7 +10,7 @@ import com.idli.model.Table
 import java.io.File
 
 fun main(args: Array<String>) {
-    val (file, types) = try {
+    val (file, types, delimiter) = try {
         Arguments.parse(args)
     } catch (e: Exception) {
         print(e.message)
@@ -24,11 +24,9 @@ fun main(args: Array<String>) {
         println("3. Exit")
         val option = readLine()!!.split('.').first().toInt()
         println()
-
-
         when (option) {
             1 -> {
-                val derivedColumns = deriveColumns(file, types)
+                val derivedColumns = deriveColumns(file, types, delimiter)
                 val maxLength = derivedColumns.map { it.name.length }.max()
                 derivedColumns.forEachIndexed { index, it ->
                     println(
@@ -42,7 +40,7 @@ fun main(args: Array<String>) {
                     )
                 }
             }
-            2 -> print(Table("sample", deriveColumns(file, types)).createStatement())
+            2 -> print(Table("sample", deriveColumns(file, types, delimiter)).createStatement())
         }
         println()
     } while (option != 3)
@@ -53,13 +51,14 @@ fun main(args: Array<String>) {
 
 private fun deriveColumns(
     file: File,
-    types: ITypes
+    types: ITypes,
+    delimiter: String
 ): List<Column> {
     val randomLines = file
         .bufferedReader().useLines {
             it.filterIndexed { index, _ -> index == 0 || index % 23 == 0 }.toList()
         }
-    val columnsBuilders = randomLines.first().parseLineToColumns(TypeInfer(types))
-    return randomLines.drop(1).fold(columnsBuilders, operation = { acc, s -> s.parseLineToColumnValues(acc) })
+    val columnsBuilders = randomLines.first().parseLineToColumns(TypeInfer(types), delimiter)
+    return randomLines.drop(1).fold(columnsBuilders, operation = { acc, s -> s.parseLineToColumnValues(acc, delimiter) })
         .map(ColumnBuilder::build)
 }

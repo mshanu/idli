@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 class LineTest {
     @Test
     fun shouldSplitByDelimitingCharacter() {
-        val splitLineToValues = "first,second".splitLineToValues(",")
+        val splitLineToValues = "first|second".splitLineToValues("|")
         assertEquals(2, splitLineToValues.size)
         assertEquals("first", splitLineToValues.first())
         assertEquals("second", splitLineToValues.last())

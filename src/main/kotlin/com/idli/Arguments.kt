@@ -6,21 +6,23 @@ import com.idli.datatypes.oracle.OracleTypes
 import com.idli.datatypes.oracle.PostgresTypes
 import java.io.File
 
-data class Arguments(val file: File, val types: ITypes) {
+data class Arguments(val file: File, val types: ITypes, val delimiter: String) {
     companion object {
-        private val types = mapOf<String, ITypes>(
+        private val types = mapOf(
             "mysql" to MySqlTypes(),
             "oracle" to OracleTypes(),
             "pg" to PostgresTypes()
         )
 
         fun parse(args: Array<String>): Arguments {
-            val filePath = args.find { it.contains(Regex("^file=.*")) }?.split("=")?.get(1)
+            val argsMap = args.map { it.split("=") }.map { it.first() to it.last() }.toMap()
+            val filePath = argsMap["file"]
                 ?: throw Exception("file argument not specified.")
-            val db = args.find { it.contains(Regex("^db=.*")) }?.split("=")?.get(1)?.toLowerCase()
+            val db = argsMap["db"]
                 ?: "mysql"
             if (!types.containsKey(db)) throw Exception("Specified db does not exists.")
-            return Arguments(File(filePath), types.getValue(db))
+            val delimiter = argsMap.getOrDefault("delimiter", ",")
+            return Arguments(File(filePath), types.getValue(db), delimiter)
         }
     }
 }
