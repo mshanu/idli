@@ -1,7 +1,7 @@
 package com.idli
 
-import com.idli.datatypes.oracle.ITypes
-import com.idli.datatypes.oracle.TypeInfer
+import com.idli.datatypes.dbs.ITypes
+import com.idli.datatypes.dbs.TypeInfer
 import com.idli.extensions.parseLineToColumnValues
 import com.idli.extensions.parseLineToColumns
 import com.idli.model.Column

@@ -1,7 +1,7 @@
 package com.idli
 
-import com.idli.datatypes.oracle.MySqlTypes
-import com.idli.datatypes.oracle.OracleTypes
+import com.idli.datatypes.dbs.MySqlTypes
+import com.idli.datatypes.dbs.OracleTypes
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test

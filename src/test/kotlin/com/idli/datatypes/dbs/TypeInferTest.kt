@@ -1,4 +1,4 @@
-package com.idli.datatypes.oracle
+package com.idli.datatypes.dbs
 
 import com.idli.model.StringType
 import org.junit.jupiter.api.Assertions.assertEquals

@@ -1,9 +1,9 @@
 package com.idli
 
-import com.idli.datatypes.oracle.ITypes
-import com.idli.datatypes.oracle.MySqlTypes
-import com.idli.datatypes.oracle.OracleTypes
-import com.idli.datatypes.oracle.PostgresTypes
+import com.idli.datatypes.dbs.ITypes
+import com.idli.datatypes.dbs.MySqlTypes
+import com.idli.datatypes.dbs.OracleTypes
+import com.idli.datatypes.dbs.PostgresTypes
 import java.io.File
 
 data class Arguments(val file: File, val types: ITypes, val delimiter: String) {
